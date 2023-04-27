@@ -12,7 +12,7 @@ endif ()
 set(CMAKE_CXX_STANDARD 17)
 
 
-add_executable(VulkanEngine main.cpp lve_app.cpp lve_window.cpp lve_pipeline.cpp)
+add_executable(VulkanEngine main.cpp lve_app.cpp lve_window.cpp lve_pipeline.cpp lve_device.cpp)
 
 
 target_link_libraries(VulkanEngine glfw3)
