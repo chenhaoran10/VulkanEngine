@@ -20,7 +20,7 @@ namespace lve {
 
     private:
         LveWindow lveWindow{WIDTH, HEIGHT, "Hello Vulkan!"};
-        LvePipeline lvePipeline{"C://Users//90646//Desktop//Vulkan/VulkanEngine/shaders/simple_shader.vert.spv",
-                                "C://Users//90646//Desktop//Vulkan/VulkanEngine/shaders/simple_shader.frag.spv"};
+        LvePipeline lvePipeline{"../shaders/simple_shader.vert.spv",
+                                "../shaders/simple_shader.frag.spv"};
     };
 }  // namespace lve
