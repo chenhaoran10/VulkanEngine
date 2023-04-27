@@ -43,6 +43,9 @@ namespace lve {
 
     PipelineConfigInfo LvePipeline::defaultPipelineConfigInfo(uint32_t width, uint32_t height) {
         PipelineConfigInfo configInfo{};
+        configInfo.inputAssemblyStateCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+        configInfo.inputAssemblyStateCreateInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+        configInfo.inputAssemblyStateCreateInfo.primitiveRestartEnable = VK_FALSE;
         return configInfo;
     }
 

@@ -7,6 +7,7 @@
 namespace lve {
 
     struct PipelineConfigInfo {
+        VkPipelineInputAssemblyStateCreateInfo inputAssemblyStateCreateInfo;
     };
 
     class LvePipeline {
