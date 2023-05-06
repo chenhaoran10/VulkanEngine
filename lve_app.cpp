@@ -19,7 +19,9 @@ namespace lve {
     void LveApp::run() {
         while (!lveWindow.shouldClose()) {
             glfwPollEvents();
+            drawFrame();
         }
+        vkDeviceWaitIdle(lveDevice.device());
     }
 
     void LveApp::createPipelineLayout() {
@@ -94,6 +96,15 @@ namespace lve {
     }
 
     void LveApp::drawFrame() {
+        uint32_t imageIndex;
+        auto result = lveSwapChain.acquireNextImage(&imageIndex);
+        if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
+            throw std::runtime_error("failed to acquire swap chain image");
+        }
+        result = lveSwapChain.submitCommandBuffers(&commandBuffers[imageIndex], &imageIndex);
+        if (result != VK_SUCCESS) {
+            throw std::runtime_error("failed to present swap chain image");
+        }
 
     }
 }  // namespace lve
