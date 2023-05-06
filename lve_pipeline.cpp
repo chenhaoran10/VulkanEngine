@@ -73,11 +73,11 @@ namespace lve {
         vertexInputInfo.pVertexBindingDescriptions = nullptr;
 
         VkPipelineViewportStateCreateInfo viewportInfo{};
-        viewportInfo.sType= VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-        viewportInfo.viewportCount =1;
+        viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+        viewportInfo.viewportCount = 1;
         viewportInfo.pViewports = &configInfo.viewport;
-        viewportInfo.scissorCount =1;
-        viewportInfo.pScissors=&configInfo.scissor;
+        viewportInfo.scissorCount = 1;
+        viewportInfo.pScissors = &configInfo.scissor;
 
 
         VkGraphicsPipelineCreateInfo pipelineInfo{};
@@ -200,6 +200,11 @@ namespace lve {
         vkDestroyShaderModule(lveDevice.device(), vertShaderModule, nullptr);
         vkDestroyShaderModule(lveDevice.device(), fragShaderModule, nullptr);
         vkDestroyPipeline(lveDevice.device(), graphicsPipeline, nullptr);
+    }
+
+    void LvePipeline::bind(VkCommandBuffer commandBuffer) {
+        vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+
     }
 
 }  // namespace lve

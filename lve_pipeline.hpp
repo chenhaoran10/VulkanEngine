@@ -16,8 +16,8 @@ namespace lve {
         VkPipelineColorBlendStateCreateInfo colorBlendInfo;
         VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
         VkPipelineLayout pipelineLayout = nullptr;
-        VkRenderPass  renderPass = nullptr;
-        uint32_t subpass=0;
+        VkRenderPass renderPass = nullptr;
+        uint32_t subpass = 0;
     };
 
     class LvePipeline {
@@ -25,13 +25,15 @@ namespace lve {
         LvePipeline(LveDevice &device, const std::string &vertFilepath, const std::string &fragFilepath,
                     const PipelineConfigInfo &configInfo);
 
-        ~LvePipeline() ;
+        ~LvePipeline();
 
         LvePipeline(const LvePipeline &) = delete;
 
         void operator=(const LvePipeline &) = delete;
 
-        static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width,uint32_t height);
+        void bind(VkCommandBuffer commandBuffer);
+
+        static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
 
     private:
         static std::vector<char> readFile(const std::string &filePath);
@@ -39,7 +41,7 @@ namespace lve {
         void createGraphicsPipeline(const std::string &vertFilepath, const std::string &fragFilepath,
                                     const PipelineConfigInfo &configInfo);
 
-        void createShaderModule(const std::vector<char>& code,VkShaderModule* shaderModule);
+        void createShaderModule(const std::vector<char> &code, VkShaderModule *shaderModule);
 
         LveDevice &lveDevice;
         VkPipeline graphicsPipeline;
