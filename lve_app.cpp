@@ -2,11 +2,13 @@
 #include "lve_app.hpp"
 
 //std
+#include <array>
 #include <stdexcept>
 
 namespace lve {
 
     LveApp::LveApp() {
+        loadModels();
         createPipelineLayout();
         createPipeline();
         createCommandBuffers();
@@ -86,7 +88,8 @@ namespace lve {
             vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
             lvePipeline->bind(commandBuffers[i]);
-            vkCmdDraw(commandBuffers[i], 3, 1, 0, 0);
+            lveModel->bind(commandBuffers[i]);
+            lveModel->draw(commandBuffers[i]);
             if (vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS) {
                 throw std::runtime_error("failed to record command buffer");
             }
@@ -106,5 +109,12 @@ namespace lve {
             throw std::runtime_error("failed to present swap chain image");
         }
 
+    }
+
+    void LveApp::loadModels() {
+        std::vector<LveModel::Vertex> vertices{{{0.0f,  -0.5f}},
+                                               {{0.5f,  0.5f}},
+                                               {{-0.5f, 0.5f}}};
+        lveModel = std::make_unique<LveModel>(lveDevice, vertices);
     }
 }  // namespace lve
