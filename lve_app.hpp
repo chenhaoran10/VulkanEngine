@@ -1,18 +1,21 @@
 #pragma once
 
-#include "lve_window.hpp"
+#include "lve_device.hpp"
+#include "lve_model.hpp"
 #include "lve_pipeline.hpp"
 #include "lve_swap_chain.hpp"
-#include "lve_model.hpp"
+#include "lve_window.hpp"
 
-//std
+// std
 #include <memory>
 #include <vector>
 
 namespace lve {
-
     class LveApp {
     public:
+        static constexpr int WIDTH = 800;
+        static constexpr int HEIGHT = 600;
+
         LveApp();
 
         ~LveApp();
@@ -22,9 +25,6 @@ namespace lve {
         LveApp &operator=(const LveApp &) = delete;
 
         void run();
-
-        static constexpr int WIDTH = 800;
-        static constexpr int HEIGHT = 600;
 
     private:
         void loadModels();

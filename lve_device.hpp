@@ -28,8 +28,9 @@ namespace lve {
 #ifdef NDEBUG
         const bool enableValidationLayers = false;
 #else
-        const bool enableValidationLayers = false;
+        const bool enableValidationLayers = true;
 #endif
+
         LveDevice(LveWindow &window);
 
         ~LveDevice();
@@ -111,7 +112,7 @@ namespace lve {
 
         void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo);
 
-        void hasGlfwRequiredInstanceExtensions();
+        void hasGflwRequiredInstanceExtensions();
 
         bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 
